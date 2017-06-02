@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2017 by michaellee8 (http://jsbin.com/hinubiw/19/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+<style id="jsbin-css">
+.ansbox{
+  border-style: none none dotted
+}
+</style>
+</head>
+
+<body>
+  <div id="render_target" style="display:none"></div>
+  <div id="interactive_mode" style="display:none"></div>
+<script id="jsbin-javascript">
+function main() {
+  var arr = revisioner.recite.getProblems(10, 1);
+  var d = document.getElementById("interactive_mode");
+  var list = document.createElement("ol");
+  d.appendChild(list);
+  for (var i = 0; i < 20; i++) {
+    var item = document.createElement("li");
+    item.appendChild(revisioner.recite.renderer.question(arr[i]));
+    list.appendChild(item);
+  }
+  d.style.display = "block";
+  //   window.print();
+}
+
+String.prototype.formatUnicorn = String.prototype.formatUnicorn ||
+  function() {
+    "use strict";
+    var str = this.toString();
+    if (arguments.length) {
+      var t = typeof arguments[0];
+      var key;
+      var args = ("string" === t || "number" === t) ?
+        Array.prototype.slice.call(arguments) : arguments[0];
+
+      for (key in args) {
+        str = str.replace(new RegExp("\\{" + key + "\\}", "gi"), args[key]);
+      }
+    }
+
+    return str;
+  };
+
+String.prototype.hashCode = function() {
+  var hash = 0,
+    i, chr;
+  if (this.length === 0) return hash;
+  for (i = 0; i < this.length; i++) {
+    chr = this.charCodeAt(i);
+    hash = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
+};
+
+if (typeof revisioner == "undefined") {
+  revisioner = {};
+}
+
+if (typeof revisioner.recite == "undefined") {
+  revisioner.recite = {}
+  revisioner.recite.getProblems = function(amount, num) {
+    var url = "http://cryptic-bastion-28974.herokuapp.com/api/getSbaProblem?number={n}&ratio={r}".formatUnicorn({
+      n: 20,
+      r: 2
+    });
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+//         document.getElementById("demo").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", url, true);
+    xhttp.send();
+    return JSON.parse(xhttp.responseText);
+  }
+  revisioner.recite.renderer = {};
+  revisioner.recite.renderer.question = function(problem) {
+    var para = document.createElement("p");
+    para.innerHTML = problem.q.replace(/{\d}/g, function(str) {
+      return '&nbsp;<input id="{id}_q{n}" class="ansbox"></input>&nbsp;'.formatUnicorn({
+        id: JSON.stringify(problem).hashCode(),
+        n: str.slice(1, str.length - 1)
+      });
+    });
+    return para;
+  }
+}
+
+main();
+
+document.getElementById("render_target").appendChild(revisioner.recite.renderer.question(revisioner.recite.getProblems(1)[0]));
+</script>
+</body>
+
+</html>
