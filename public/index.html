@@ -77,17 +77,13 @@ if (typeof revisioner == "undefined") {
 if (typeof revisioner.recite == "undefined") {
   revisioner.recite = {}
   revisioner.recite.getProblems = function(amount, num) {
-    var url = "http://cryptic-bastion-28974.herokuapp.com/api/getSbaProblem?number={n}&ratio={r}".formatUnicorn({
+    var url = "https://cryptic-bastion-28974.herokuapp.com/api/getSbaProblem?number={n}&ratio={r}".formatUnicorn({
       n: 20,
       r: 2
     });
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-//         document.getElementById("demo").innerHTML = this.responseText;
-      }
-    };
-    xhttp.open("GET", url, true);
+    
+    xhttp.open("GET", url, false);
     xhttp.send();
     return JSON.parse(xhttp.responseText);
   }
