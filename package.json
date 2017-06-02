@@ -1,0 +1,28 @@
+{
+  "name": "revisioner-api",
+  "version": "1.0.0",
+  "description": "revisioner api for recite",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaellee8/revisioner-recite-api.git"
+  },
+  "keywords": [
+    "revisioner"
+  ],
+  "author": "Michael lee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaellee8/revisioner-recite-api/issues"
+  },
+  "homepage": "https://github.com/michaellee8/revisioner-recite-api#readme"
+}
