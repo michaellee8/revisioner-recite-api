@@ -42,7 +42,7 @@ app.get('/api/getSbaProblem', function (req, res) {
                     obj.q = obj.q.replace(obj.a[j], "{" + j.toString() + "}");
                 }
                 resarr.push(obj);
-                ddata.splice(ranindex, 1);
+                ddata.content.splice(ranindex, 1);
             }
             res.send(JSON.stringify(resarr));
         }
