@@ -66,5 +66,6 @@ function arrToRegex(arr) {
         regexstr += "|";
     }
     regexstr = regexstr.substring(0, arr.length - 1);
+    console.log(regexstr);
     return regexstr;
 }
