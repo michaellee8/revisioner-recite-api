@@ -91,14 +91,14 @@ Released under the MIT license: http://jsbin.mit-license.org
       revisioner.recite.renderer = {};
       revisioner.recite.renderer.question = function (problem) {
         var para = document.createElement("p");
-        para.id = "JSON.stringify(problem).hashCode()" + "_q";
+        para.id = JSON.stringify(problem).hashCode() + "_q";
         para.innerHTML = problem.q.replace(/{\d}/g, function (str) {
           return '&nbsp;<input id="{id}_q{n}" class="ansbox" readonly="readonly"></input>&nbsp;'.formatUnicorn({
             id: JSON.stringify(problem).hashCode(),
             n: str.slice(1, str.length - 1)
           });
         });
-        
+
 
 
         return para;
