@@ -27,11 +27,11 @@ Released under the MIT license: http://jsbin.mit-license.org
   <div id="interactive_mode" style="display:none"></div>
 <script id="jsbin-javascript">
 function main() {
-  var arr = revisioner.recite.getProblems(10, 1);
+  var arr = revisioner.recite.getProblems(37, 2);
   var d = document.getElementById("interactive_mode");
   var list = document.createElement("ol");
   d.appendChild(list);
-  for (var i = 0; i < 20; i++) {
+  for (var i = 0; i < arr.length; i++) {
     var item = document.createElement("li");
     item.appendChild(revisioner.recite.renderer.question(arr[i]));
     list.appendChild(item);
@@ -78,8 +78,8 @@ if (typeof revisioner.recite == "undefined") {
   revisioner.recite = {}
   revisioner.recite.getProblems = function(amount, num) {
     var url = "https://cryptic-bastion-28974.herokuapp.com/api/getSbaProblem?number={n}&ratio={r}".formatUnicorn({
-      n: 24,
-      r: 2
+      n: amount,
+      r: num
     });
     var xhttp = new XMLHttpRequest();
     
