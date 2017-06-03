@@ -14,7 +14,7 @@ Released under the MIT license: http://jsbin.mit-license.org
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>JS Bin</title>
+  <title>recite@revisioner by Michael Lee</title>
 <style id="jsbin-css">
 .ansbox{
   border-style: none none dotted
@@ -23,12 +23,13 @@ Released under the MIT license: http://jsbin.mit-license.org
 </head>
 
 <body>
+  <p>recite@revisioner by Michael Lee</p><br/>
   <div id="render_target" style="display:none"></div>
-  <div id="interactive_mode" style="display:none"></div>
+  <div id="page_mode" style="display:none"></div>
 <script id="jsbin-javascript">
 function main() {
   var arr = revisioner.recite.getProblems(37, 2);
-  var d = document.getElementById("interactive_mode");
+  var d = document.getElementById("page_mode");
   var list = document.createElement("ol");
   d.appendChild(list);
   for (var i = 0; i < arr.length; i++) {
