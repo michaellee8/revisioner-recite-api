@@ -37,7 +37,7 @@ app.get('/api/getSbaProblem', function (req, res) {
                     obj.a.push(testarr.splice(Math.floor(Math.random() * testarr.length), 1)[0]);
                     numberleft--;
                 }
-                obj.q = ddata.content[ranindex].content;
+                obj.q = ddata.content[ranindex].whole;
                 for (var j = 0; j < obj.a.length; j++) {
                     obj.q = obj.q.replace(obj.a[j], "{" + j.toString() + "}");
                 }
