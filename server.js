@@ -9,7 +9,7 @@ app.get('/api/getSbaProblem', function (req, res) {
     var n = parseInt(req.query.number);
     var r = parseInt(req.query.ratio);
     if (n && r) {
-        if (n > 20) {
+        if (n > data.content.length) {
             res.send("request too large");
         } else {
             var resarr = [];

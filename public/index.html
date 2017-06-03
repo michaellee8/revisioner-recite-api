@@ -78,7 +78,7 @@ if (typeof revisioner.recite == "undefined") {
   revisioner.recite = {}
   revisioner.recite.getProblems = function(amount, num) {
     var url = "https://cryptic-bastion-28974.herokuapp.com/api/getSbaProblem?number={n}&ratio={r}".formatUnicorn({
-      n: 20,
+      n: 24,
       r: 2
     });
     var xhttp = new XMLHttpRequest();
@@ -102,7 +102,6 @@ if (typeof revisioner.recite == "undefined") {
 
 main();
 
-document.getElementById("render_target").appendChild(revisioner.recite.renderer.question(revisioner.recite.getProblems(1)[0]));
 </script>
 </body>
 
