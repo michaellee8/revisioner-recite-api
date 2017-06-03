@@ -93,9 +93,11 @@ Released under the MIT license: http://jsbin.mit-license.org
         var para = document.createElement("p");
         para.id = JSON.stringify(problem).hashCode() + "_q";
         para.innerHTML = problem.q.replace(/{\d}/g, function (str) {
-          return '&nbsp;<input id="{id}_q{n}" class="ansbox" readonly="readonly"></input>&nbsp;'.formatUnicorn({
+          return '&nbsp;<input id="{id}_q{n}" class="ansbox" onfocus="this.value={ans}" onblur="this.value={blurans}" readonly="readonly"></input>&nbsp;'.formatUnicorn({
             id: JSON.stringify(problem).hashCode(),
-            n: str.slice(1, str.length - 1)
+            n: str.slice(1, str.length - 1),
+            ans: problem.a[parseInt(str.slice(1, str.length - 1))],
+            blurans: ""
           });
         });
 
@@ -106,7 +108,6 @@ Released under the MIT license: http://jsbin.mit-license.org
     }
 
     main();
-
   </script>
 </body>
 
