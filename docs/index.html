@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>recite@revisioner by Michael Lee</title>
+  <style id="jsbin-css">
+    .ansbox {
+      border-style: none none dotted
+    }
+  </style>
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-100336239-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+<body>
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '778887452268207',
+        xfbml: true,
+        version: 'v2.9'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+  <div class="fb-like" data-share="true" data-width="450" data-show-faces="true">
+  </div>
+  <p>recite@revisioner by Michael Lee<br/> 按一下橫線上方的空格可顯示答案，按其他的地方隱藏答案
+    <br/> 重新整理／按 F5 可以獲得新一份 <br/> 來源：goo.gl/DZKJY0
+  </p>
+  <div id="render_target" style="display:none"></div>
+  <div id="page_mode" style="display:none"></div>
+
+  <script id="jsbin-javascript">
+    function main() {
+      var arr = revisioner.recite.getProblems(36, 1);
+      var d = document.getElementById("page_mode");
+      var list = document.createElement("ol");
+      d.appendChild(list);
+      for (var i = 0; i < arr.length; i++) {
+        var item = document.createElement("li");
+        item.appendChild(revisioner.recite.renderer.question(arr[i]));
+        list.appendChild(item);
+      }
+      d.style.display = "block";
+      //   window.print();
+    }
+
+    String.prototype.formatUnicorn = String.prototype.formatUnicorn ||
+      function () {
+        "use strict";
+        var str = this.toString();
+        if (arguments.length) {
+          var t = typeof arguments[0];
+          var key;
+          var args = ("string" === t || "number" === t) ?
+            Array.prototype.slice.call(arguments) : arguments[0];
+
+          for (key in args) {
+            str = str.replace(new RegExp("\\{" + key + "\\}", "gi"), args[key]);
+          }
+        }
+
+        return str;
+      };
+
+    String.prototype.hashCode = function () {
+      var hash = 0,
+        i, chr;
+      if (this.length === 0) return hash;
+      for (i = 0; i < this.length; i++) {
+        chr = this.charCodeAt(i);
+        hash = ((hash << 5) - hash) + chr;
+        hash |= 0; // Convert to 32bit integer
+      }
+      return hash;
+    };
+
+    if (typeof revisioner == "undefined") {
+      revisioner = {};
+    }
+
+    if (typeof revisioner.recite == "undefined") {
+      revisioner.recite = {}
+      revisioner.recite.getProblems = function (amount, num) {
+        var url = "https://cryptic-bastion-28974.herokuapp.com/api/getSbaProblem?number={n}&ratio={r}".formatUnicorn({
+          n: amount,
+          r: num
+        });
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.open("GET", url, false);
+        xhttp.send();
+        return JSON.parse(xhttp.responseText);
+      }
+      revisioner.recite.renderer = {};
+      revisioner.recite.renderer.question = function (problem) {
+        var para = document.createElement("p");
+        para.id = JSON.stringify(problem).hashCode() + "_q";
+        para.innerHTML = problem.q.replace(/{\d+}/g, function (str) {
+          return '&nbsp;<input id="{id}_q{n}" class="ansbox" onfocus="this.value={ans}" onblur="this.value={blurans}" readonly="readonly"></input>&nbsp;'.formatUnicorn({
+            id: JSON.stringify(problem).hashCode(),
+            n: str.slice(1, str.length - 1),
+            ans: "'" + problem.a[parseInt(str.slice(1, str.length - 1))] + "'",
+            blurans: "''"
+          });
+        });
+
+
+
+        return para;
+      }
+    }
+
+    main();
+  </script>
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- revisioner -->
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3188064719081935" data-ad-slot="2748434003" data-ad-format="auto"></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
+
+</html>
