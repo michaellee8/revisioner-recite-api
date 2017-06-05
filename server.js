@@ -9,7 +9,7 @@ app.get('/api/getSbaProblem', function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     var n = parseInt(req.query.number);
     var r = parseInt(req.query.ratio);
-    if (n && r) {
+    if (isNaN(n) || isNaN(r)) {
         if (n > data.content.length) {
             res.send("request too large");
         } else {
