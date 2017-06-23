@@ -6,7 +6,7 @@ var data = require("./data.json");
 app.use(express.static('public'));
 
 app.get('/api/getSbaProblem', function (req, res) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    // res.setHeader('Access-Control-Allow-Origin', '*');
     var n = parseInt(req.query.number);
     var r = parseInt(req.query.ratio);
     if (!isNaN(n) || !isNaN(r)) {
