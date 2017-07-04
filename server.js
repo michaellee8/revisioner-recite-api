@@ -25,7 +25,6 @@ app.get('/api/getSbaProblem', function (req, res) {
                     obj.mean = "";
                 }
                 var testarr = ddata.content[ranindex].content.split(new RegExp(arrToRegex(ddata.symbols), 'g'));
-                console.log(arrToRegex(ddata.symbols));
                 while (testarr[testarr.length - 1] == "") {
                     testarr.pop();
                 }
